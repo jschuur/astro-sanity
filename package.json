@@ -1,0 +1,26 @@
+{
+  "name": "astro-sanity",
+  "version": "1.0.0",
+  "description": "Astro & Sanity powered personal site using SST",
+  "main": "index.js",
+  "scripts": {
+    "start": "ntl -A",
+    "dev": "concurrently pnpm:dev:*",
+    "dev:site": "pnpm -F @joostschuur/site dev",
+    "dev:cms": "pnpm -F @joostschuur/cms dev",
+    "deploy:site": "pnpm -F @joostschuur/cms sst:deploy",
+    "deploy:cms": "pnpm -F @joostschuur/cms deploy"
+  },
+  "keywords": [],
+  "author": "Joost Schuur <jschuur@jschuur.com>",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.0",
+    "ntl": "^5.1.0"
+  },
+  "cspell": {
+    "ignorePaths": [
+      "pnpm-lock.yaml"
+    ]
+  }
+}

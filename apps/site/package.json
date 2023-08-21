@@ -1,0 +1,26 @@
+{
+  "name": "@joostschuur/site",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "sst bind astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "sst:deploy": "sst deploy",
+    "sst:dev": "sst dev"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^0.19.7",
+    "@astrojs/rss": "^2.4.4",
+    "@astrojs/sitemap": "^2.0.2",
+    "astro": "^2.10.12"
+  },
+  "devDependencies": {
+    "sst": "^2.24.9",
+    "aws-cdk-lib": "2.92.0",
+    "constructs": "10.2.69",
+    "astro-sst": "^2.24.9"
+  }
+}
