@@ -1,0 +1,12 @@
+---
+import type { PortableTextBlock } from "@sanity/types";
+import { PortableText } from "astro-portabletext";
+
+type Props = {
+  value: PortableTextBlock[];
+};
+
+const {value} = Astro.props;
+---
+
+<PortableText value={value} />

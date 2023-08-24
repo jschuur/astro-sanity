@@ -1,0 +1,20 @@
+---
+import { Icon } from 'astro-icon';
+
+import { getSocials } from '../cms/queries';
+
+const socials = await getSocials();
+---
+
+<div class='social-links'>
+  { socials.map((social) => (
+    <a href={social.link} aria-label={social.name}>
+      <span class="sr-only">{social.altText || `Follow me on ${social.name}`}</span>
+      <Icon
+        name={social.icon}
+        pack={social.pack}
+        class="w-6 md:w-8 hover:scale-150 ease-in-out transition"
+      />
+    </a>
+  ))}
+</div>

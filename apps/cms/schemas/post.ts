@@ -2,13 +2,14 @@ import {defineField, defineType} from 'sanity'
 
 export default defineType({
   name: 'post',
-  title: 'Post',
+  title: 'Blog Post',
   type: 'document',
   fields: [
     defineField({
       name: 'title',
       title: 'Title',
       type: 'string',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'slug',
@@ -18,20 +19,7 @@ export default defineType({
         source: 'title',
         maxLength: 96,
       },
-    }),
-    defineField({
-      name: 'author',
-      title: 'Author',
-      type: 'reference',
-      to: {type: 'author'},
-    }),
-    defineField({
-      name: 'mainImage',
-      title: 'Main image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'categories',
@@ -40,26 +28,38 @@ export default defineType({
       of: [{type: 'reference', to: {type: 'category'}}],
     }),
     defineField({
+      name: 'summary',
+      title: 'Summary',
+      type: 'text',
+      rows: 4,
+    }),
+    defineField({
+      name: 'headerImage',
+      type: 'image',
+      title: 'Header Image',
+      options: {
+        hotspot: true,
+      },
+      description: 'Optional. 2.4:1 aspect ratio, at least 1200x500 recommended.',
+    }),
+    // TODO: initial value
+    defineField({
       name: 'publishedAt',
       title: 'Published at',
+      type: 'datetime',
+      validation: (Rule) => Rule.required(),
+    }),
+    // TODO: automatically update
+    defineField({
+      name: 'updatedAt',
+      title: 'Updated at',
       type: 'datetime',
     }),
     defineField({
       name: 'body',
       title: 'Body',
       type: 'blockContent',
+      validation: (Rule) => Rule.required(),
     }),
   ],
-
-  preview: {
-    select: {
-      title: 'title',
-      author: 'author.name',
-      media: 'mainImage',
-    },
-    prepare(selection) {
-      const {author} = selection
-      return {...selection, subtitle: author && `by ${author}`}
-    },
-  },
 })

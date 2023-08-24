@@ -15,7 +15,7 @@
   "author": "Joost Schuur <jschuur@jschuur.com>",
   "license": "ISC",
   "dependencies": {
-    "concurrently": "^8.2.0",
+    "concurrently": "^8.2.1",
     "ntl": "^5.1.0"
   },
   "cspell": {
