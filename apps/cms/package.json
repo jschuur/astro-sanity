@@ -15,9 +15,9 @@
     "sanity"
   ],
   "dependencies": {
-    "@sanity-typed/types": "^4.0.4",
+    "@sanity-typed/types": "^4.0.5",
     "@sanity/icons": "^2.4.1",
-    "@sanity/ui": "^1.7.10",
+    "@sanity/ui": "^1.7.11",
     "@sanity/vision": "^3.15.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -30,9 +30,9 @@
     "@sanity/eslint-config-studio": "^3.0.0",
     "@types/react": "^18.2.21",
     "@types/styled-components": "^5.1.26",
-    "eslint": "^8.47.0",
+    "eslint": "^8.48.0",
     "prettier": "^3.0.2",
-    "typescript": "^5.1.6"
+    "typescript": "^5.2.2"
   },
   "prettier": {
     "semi": false,
