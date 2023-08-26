@@ -1,13 +1,14 @@
 {
-  "name": "astro-sanity",
+  "name": "joostschuur.com",
   "version": "1.0.0",
   "description": "Astro & Sanity powered personal site using SST",
   "main": "index.js",
   "scripts": {
     "start": "ntl -A",
-    "dev": "concurrently pnpm:dev:*",
-    "dev:site": "pnpm -F @joostschuur/site dev",
-    "dev:cms": "pnpm -F @joostschuur/cms dev",
+    "dev": "turbo run dev --parallel",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "format": "turbo run format",
     "deploy:site": "pnpm -F @joostschuur/cms sst:deploy",
     "deploy:cms": "pnpm -F @joostschuur/cms deploy"
   },
@@ -22,5 +23,8 @@
     "ignorePaths": [
       "pnpm-lock.yaml"
     ]
+  },
+  "devDependencies": {
+    "turbo": "^1.10.13"
   }
 }
