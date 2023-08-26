@@ -1,17 +1,33 @@
-import { groq, useSanityClient } from 'astro-sanity';
-import type { Category, HomePage, Post, ProjectsPage, SiteCollection, SiteSettings } from './types';
+import type { SanityValues } from "@joostschuur/cms";
+import { createClient } from "@sanity-typed/client";
 
-export const getAll = <T>(collection: SiteCollection): Promise<T[]> =>
-  useSanityClient().fetch(groq`*[_type == "${collection}"]`);
+const projectId = process.env.SANITY_PROJECT_ID;
+const dataset = process.env.SANITY_DATASET || "production";
 
-export const getPosts = () => getAll<Post>('post');
-export const getCategories = () => getAll<Category>('category');
+const client = createClient<SanityValues>()({
+  projectId,
+  dataset,
+  useCdn: true,
+  apiVersion: "2023-05-23",
+});
 
-export const getSiteSettings = () => getAll<SiteSettings>('sitesettings');
-export const getHomePage = () => getAll<HomePage>('projectspage');
-export const getProjectsPage = () => getAll<ProjectsPage>('projectspage');
+export const getSingleton = async <T>(page: string) =>
+  (await client.fetch(`*[_type == "${page}"] `))?.[0] as T;
 
-export const getProjects = () =>
-  getAll<ProjectsPage>('projectspage').then((settings) => settings?.[0]?.projects || []);
-export const getSocials = () =>
-  getAll<SiteSettings>('sitesettings').then((settings) => settings?.[0]?.socials || []);
+export const getPosts = () =>
+  client.fetch('*[_type=="post"]') as Promise<SanityValues["post"][]>;
+export const getCategories = () => client.fetch('*[_type=="category"]');
+export const getTech = () => client.fetch('*[_type=="tech"]');
+
+export const getSiteSettings = (): SanityValues["sitesettings"] =>
+  client
+    .fetch('*[_type=="sitesettings"]{...,socials[]->,navmenu[]->}')
+    .then((settings) => settings[0]);
+
+export const getHomePage = () =>
+  getSingleton<SanityValues["homepage"]>("homepage");
+
+export const getProjectsPage = (): SanityValues["projectspage"] =>
+  client
+    .fetch('*[_type=="projectspage"]{...,projects[]->}')
+    .then((page) => page[0]);

@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import {defineArrayMember, defineField, defineType} from '@sanity-typed/types'
 
 export default defineType({
   name: 'projectspage',
@@ -20,6 +20,7 @@ export default defineType({
       title: 'Page Title',
       type: 'string',
       group: 'seo',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'pageHeader',
@@ -34,6 +35,7 @@ export default defineType({
       type: 'text',
       rows: 4,
       group: 'seo',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'projects',
@@ -41,10 +43,10 @@ export default defineType({
       type: 'array',
       group: 'content',
       of: [
-        {
+        defineArrayMember({
           type: 'reference',
-          to: [{type: 'project'}],
-        },
+          to: [{type: 'project'} as const],
+        }),
       ],
     }),
   ],

@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import {defineArrayMember, defineField, defineType} from '@sanity-typed/types'
 
 const MAX_FEATURED_ITEMS = 8
 
@@ -26,6 +26,8 @@ export default defineType({
       title: 'Page Title',
       type: 'string',
       group: 'seo',
+      initialValue: 'Joost Schuur',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'description',
@@ -33,6 +35,7 @@ export default defineType({
       type: 'text',
       rows: 4,
       group: 'seo',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'heroTitle',
@@ -85,18 +88,18 @@ export default defineType({
       group: 'featured',
       title: 'Featured Items',
       of: [
-        {
+        defineArrayMember({
           type: 'reference',
           title: 'Featured Items',
           to: [
             {
-              type: 'post',
+              type: 'post' as const,
             },
             {
-              type: 'project',
+              type: 'project' as const,
             },
           ],
-        },
+        }),
       ],
       description: `Posts or Projects to feature (up to ${MAX_FEATURED_ITEMS}).`,
       validation: (Rule) => Rule.max(MAX_FEATURED_ITEMS),

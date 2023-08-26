@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import {defineArrayMember, defineField, defineType} from '@sanity-typed/types'
 
 export default defineType({
   name: 'project',
@@ -52,10 +52,10 @@ export default defineType({
       title: 'Tech Stack',
       type: 'array',
       of: [
-        {
+        defineArrayMember({
           type: 'reference',
-          to: {type: 'tech'},
-        },
+          to: [{type: 'tech'} as const],
+        }),
       ],
     }),
   ],

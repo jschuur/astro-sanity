@@ -16,14 +16,15 @@
     "@astrojs/rss": "^2.4.4",
     "@astrojs/sitemap": "^2.0.2",
     "@astrojs/tailwind": "^4.0.0",
+    "@sanity-typed/client": "^1.0.4",
     "@sanity/client": "^6.4.9",
     "@sanity/types": "^3.15.1",
     "astro": "^2.10.13",
     "astro-icon": "^0.8.1",
     "astro-portabletext": "^0.9.1",
-    "astro-sanity": "^1.1.7"
   },
   "devDependencies": {
+    "@joostschuur/cms": "workspace:*",
     "astro-sst": "^2.24.12",
     "aws-cdk-lib": "2.92.0",
     "constructs": "10.2.69",

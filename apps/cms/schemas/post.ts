@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import {defineArrayMember, defineField, defineType} from '@sanity-typed/types'
 
 export default defineType({
   name: 'post',
@@ -25,7 +25,7 @@ export default defineType({
       name: 'categories',
       title: 'Categories',
       type: 'array',
-      of: [{type: 'reference', to: {type: 'category'}}],
+      of: [defineArrayMember({type: 'reference', to: [{type: 'category' as const}]})],
     }),
     defineField({
       name: 'summary',
@@ -58,7 +58,15 @@ export default defineType({
     defineField({
       name: 'body',
       title: 'Body',
-      type: 'blockContent',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'block',
+        }),
+        defineArrayMember({
+          type: 'image',
+        }),
+      ],
       validation: (Rule) => Rule.required(),
     }),
   ],

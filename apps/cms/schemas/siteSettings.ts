@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import {defineArrayMember, defineField, defineType} from '@sanity-typed/types'
 
 export default defineType({
   name: 'sitesettings',
@@ -29,7 +29,7 @@ export default defineType({
       group: 'navmenu',
       type: 'array',
       of: [
-        {
+        defineArrayMember({
           type: 'object',
           fields: [
             defineField({
@@ -62,7 +62,7 @@ export default defineType({
               subtitle: link + (prefetch ? ' (prefetched)' : ''),
             }),
           },
-        },
+        }),
       ],
     }),
     defineField({
@@ -71,7 +71,7 @@ export default defineType({
       type: 'array',
       group: 'socials',
       of: [
-        {
+        defineArrayMember({
           type: 'object',
           fields: [
             defineField({
@@ -116,7 +116,7 @@ export default defineType({
               subtitle: link,
             }),
           },
-        },
+        }),
       ],
     }),
     defineField({

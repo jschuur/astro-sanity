@@ -2,7 +2,7 @@
   "name": "@joostschuur/cms",
   "private": true,
   "version": "1.0.0",
-  "main": "package.json",
+  "main": "index.ts",
   "license": "UNLICENSED",
   "scripts": {
     "dev": "sanity dev",
@@ -15,6 +15,7 @@
     "sanity"
   ],
   "dependencies": {
+    "@sanity-typed/types": "^4.0.4",
     "@sanity/icons": "^2.4.1",
     "@sanity/ui": "^1.7.10",
     "@sanity/vision": "^3.15.1",

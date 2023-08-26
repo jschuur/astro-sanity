@@ -1,7 +1,10 @@
+import type {InferSchemaValues} from '@sanity-typed/types'
+import {defineConfig} from '@sanity-typed/types'
+
 import {CogIcon} from '@sanity/icons'
 import {Card, Stack, Text} from '@sanity/ui'
 import {visionTool} from '@sanity/vision'
-import {NavbarProps, defineConfig} from 'sanity'
+import {NavbarProps} from 'sanity'
 import {vercelDeployTool} from 'sanity-plugin-vercel-deploy'
 import {deskTool} from 'sanity/desk'
 
@@ -64,7 +67,7 @@ function CustomNavbar(props: NavbarProps) {
   )
 }
 
-export default defineConfig({
+const config = defineConfig({
   name: 'default',
   title: 'joostschuur.com',
   projectId,
@@ -140,3 +143,7 @@ export default defineConfig({
     },
   },
 })
+
+export type SanityValues = InferSchemaValues<typeof config>
+
+export default config
