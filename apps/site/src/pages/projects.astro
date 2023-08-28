@@ -1,24 +1,22 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import SiteLayout from "../layouts/SiteLayout.astro";
 
-import { getProjects } from '../cms/queries';
+import Block from "../components/Block.astro";
+import ProjectList from "../components/projects/ProjectList.astro";
 
-const projects = await getProjects();
+import { getProjectsPage } from "../cms/queries";
+
+const projectsPage = await getProjectsPage();
+const { projects, pageHeader, pageTitle, description, pageBody } = projectsPage;
 
 export const prerender = true;
 ---
 
-<Layout
-	title="Projects"
-	summary="Projects that I've enjoyed working on."
-	publishedAt="August 20 2023"
->
-  <h1 class="text-xl">Projects</h1>
-	<ul>
-    { projects.map(project => (
-      <li>
-        <a href={project.url}>{project.name}</a>
-      </li>
-    ))}
-	</ul>
-</Layout>
+<SiteLayout title={pageTitle} description={description}>
+  <h1 class="text-2xl">
+    {pageHeader || pageTitle}
+  </h1>
+  <Block class="pt-1 pb-6" value={pageBody} />
+
+  <ProjectList projects={projects} />
+</SiteLayout>

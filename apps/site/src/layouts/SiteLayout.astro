@@ -1,0 +1,84 @@
+---
+import "../styles/global.css";
+
+import { SEO } from "astro-seo";
+
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import GoogleFonts from "./GoogleFonts.astro";
+
+import { getSiteSettings } from "../cms/queries";
+
+import { buildCanonicalUrl } from "../util";
+
+type Props = {
+  title?: string;
+  description?: string;
+  type?: string;
+  author?: string;
+  image?: string;
+};
+
+const { author, type = "website", image = "" } = Astro.props;
+
+const siteSettings = await getSiteSettings();
+const { socials, footerText, navMenu, siteTitle, siteDescription } =
+  siteSettings;
+
+const title = Astro.props.title || siteTitle;
+const description = Astro.props.description || siteDescription;
+
+const canonicalUrl = buildCanonicalUrl(Astro);
+
+const openGraph = {
+  basic: {
+    title,
+    type,
+    image,
+    url: canonicalUrl,
+  },
+  ...(author
+    ? {
+        article: {
+          authors: [author],
+        },
+      }
+    : undefined),
+};
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <GoogleFonts />
+
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={siteTitle}
+      href="/rss.xml"
+    />
+
+    <SEO
+      title={title}
+      description={description}
+      openGraph={openGraph}
+      canonical={canonicalUrl}
+    />
+  </head>
+
+  <body class="">
+    <div
+      id="container"
+      class="flex flex-col px-2 md:px-8 min-h-screen max-w-3xl mx-auto"
+    >
+      <Header navMenu={navMenu} />
+      <main id="main" class="items-start grow">
+        <slot />
+      </main>
+      <Footer text={footerText} socials={socials} />
+    </div>
+  </body>
+</html>

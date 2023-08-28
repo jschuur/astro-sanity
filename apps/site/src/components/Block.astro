@@ -2,11 +2,22 @@
 import type { PortableTextBlock } from "@sanity/types";
 import { PortableText } from "astro-portabletext";
 
+import Inline from "./Inline.astro";
+
 type Props = {
   value: PortableTextBlock[];
+  inline: boolean;
+  class: string;
 };
 
-const {value} = Astro.props;
+const { value, inline, class: className } = Astro.props;
+
+const components = {
+  block: {
+    // strip paragraph tags from inline blocks
+    ...(inline && { normal: Inline }),
+  },
+};
 ---
 
-<PortableText value={value} />
+<PortableText value={value} class={className} components={components} />

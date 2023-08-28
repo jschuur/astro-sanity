@@ -1,26 +1,26 @@
 ---
-import Block from '../../components/Block.astro';
-import BlogPost from '../../layouts/BlogPost.astro';
+import BlogPost from "../../components/blog/BlogPost.astro";
+import SiteLayout from "../../layouts/SiteLayout.astro";
 
-import { getPosts } from '../../cms/queries';
+import { getPosts } from "../../cms/queries";
 
-import type { Post } from '../../cms/types';
+import type { Post } from "../../cms/types";
 
 export async function getStaticPaths() {
-	const posts = await getPosts();
-	return posts.map((post) => ({
-		params: { slug: post.slug.current },
-		props: post,
-	}));
+  const posts = await getPosts();
+
+  return posts.map((post) => ({
+    params: { slug: post.slug.current },
+    props: post,
+  }));
 }
-type Props = Post
+type Props = Post;
 
 const post = Astro.props;
-const { body } = post;
 
 export const prerender = true;
 ---
 
-<BlogPost {...post}>
-	<Block value={body} />
-</BlogPost>
+<SiteLayout title="" description="" >
+  <BlogPost {...post} />
+</SiteLayout>

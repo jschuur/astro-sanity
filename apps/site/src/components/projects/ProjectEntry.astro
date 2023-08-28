@@ -1,0 +1,33 @@
+---
+import { Icon } from "astro-icon/components";
+import Block from "../Block.astro";
+
+import type { Project } from "../../cms/types";
+
+type Props = Project;
+
+const { name, url, description, repoUrl, releasedAt } = Astro.props;
+---
+
+<div class="pb-4">
+  <div class="flex items-center gap-2">
+    <h2 class="text-lg before:content-['»']">
+      <a
+        class="underline underline-offset-8 decoration-orange-500 hover:text-orange-500"
+        href={url}>{name}</a
+      >
+    </h2>
+    {
+      repoUrl ? (
+        <a href={repoUrl}>
+          <Icon
+            name="fa6-brands:github"
+            class="mb-1 hover:text-orange-500 text-gray-600 ease-in-out transition"
+          />
+        </a>
+      ) : null
+    }
+  </div>
+  <!-- {releasedAt ? <FormattedDate date={releasedAt} /> : null}{" "} -->
+  <Block value={description} />{" "}
+</div>

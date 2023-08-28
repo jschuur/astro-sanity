@@ -1,0 +1,13 @@
+---
+import ProjectEntry from "./ProjectEntry.astro";
+
+import type { Project } from "../../cms/types";
+
+type Props = {
+  projects: Project[];
+};
+
+const { projects } = Astro.props;
+---
+
+{projects ? projects.map((project) => <ProjectEntry {...project} />) : null}

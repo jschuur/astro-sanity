@@ -1,20 +1,27 @@
 ---
-import { Icon } from 'astro-icon';
+import { Icon } from "astro-icon/components";
 
-import { getSocials } from '../cms/queries';
+import type { Social } from "../cms/types";
 
-const socials = await getSocials();
+type Props = {
+  socials: Social[];
+};
+
+const { socials } = Astro.props;
 ---
 
-<div class='social-links'>
-  { socials.map((social) => (
-    <a href={social.link} aria-label={social.name}>
-      <span class="sr-only">{social.altText || `Follow me on ${social.name}`}</span>
-      <Icon
-        name={social.icon}
-        pack={social.pack}
-        class="w-6 md:w-8 hover:scale-150 ease-in-out transition"
-      />
-    </a>
-  ))}
+<div class="flex flex-row gap-2 items-center md:gap-3 text-xl md:text-2xl">
+  {
+    socials.map((social) => (
+      <a href={social.link} aria-label={social.name}>
+        <span class="sr-only">
+          {social.altText || `Follow me on ${social.name}`}
+        </span>
+        <Icon
+          name={social.icon}
+          class="hover:text-orange-500 text-gray-600 ease-in-out transition"
+        />
+      </a>
+    ))
+  }
 </div>

@@ -70,4 +70,16 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
   ],
+  preview: {
+    select: {
+      title: 'title',
+      publishedAt: 'publishedAt',
+    },
+    prepare({title, publishedAt}) {
+      return {
+        title,
+        subtitle: publishedAt ? new Date(publishedAt).toLocaleDateString() : 'Missing publish date',
+      }
+    },
+  },
 })

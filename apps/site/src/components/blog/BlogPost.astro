@@ -1,0 +1,13 @@
+---
+import type { Post } from "../../cms/types";
+import Block from "../Block.astro";
+
+type Props = Post;
+
+const { title, body } = Astro.props;
+---
+
+<div class="">
+  <h1>{title}</h1>
+  <Block value={body} />
+</div>

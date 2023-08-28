@@ -16,8 +16,8 @@ export type Category = SanityValues["category"];
 export type Tech = SanityValues["tech"];
 
 export type Project = SanityValues["project"];
-export type Social = SanityValues["social"];
-export type NavMenuEntry = SanityValues["navmenu"];
+export type Social = SanityValues["sitesettings"]["socials"][number];
+export type NavMenuEntry = SanityValues["sitesettings"]["navMenu"][number];
 
 export type FeaturedItem = Post | Project;
 

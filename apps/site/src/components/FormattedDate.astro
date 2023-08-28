@@ -1,19 +1,18 @@
 ---
 type Props = {
-	date: Date | string;
-}
+  date: Date | string;
+};
 
 const { date: dateParam } = Astro.props;
 const date = typeof dateParam === "string" ? new Date(dateParam) : dateParam;
-
 ---
 
 <time datetime={date.toISOString()}>
-	{
-		date.toLocaleDateString('en-us', {
-			year: 'numeric',
-			month: 'short',
-			day: 'numeric',
-		})
-	}
+  {
+    date.toLocaleDateString("en-us", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    })
+  }
 </time>

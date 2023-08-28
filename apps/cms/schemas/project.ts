@@ -17,6 +17,7 @@ export default defineType({
       description: 'Temporarily hide a project.',
       type: 'boolean',
       initialValue: true,
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'url',

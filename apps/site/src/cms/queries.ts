@@ -1,6 +1,8 @@
 import type { SanityValues } from "@joostschuur/cms";
 import { createClient } from "@sanity-typed/client";
 
+import type { SiteCollection } from "./types";
+
 const projectId = process.env.SANITY_PROJECT_ID;
 const dataset = process.env.SANITY_DATASET || "production";
 
@@ -11,23 +13,17 @@ const client = createClient<SanityValues>()({
   apiVersion: "2023-05-23",
 });
 
-export const getSingleton = async <T>(page: string) =>
-  (await client.fetch(`*[_type == "${page}"] `))?.[0] as T;
+export const getSingleton = async (page: string) =>
+  (await client.fetch(`*[_type == "${page}"] `))?.[0];
 
-export const getPosts = () =>
-  client.fetch('*[_type=="post"]') as Promise<SanityValues["post"][]>;
-export const getCategories = () => client.fetch('*[_type=="category"]');
-export const getTech = () => client.fetch('*[_type=="tech"]');
+export const getAll = (collection: SiteCollection) =>
+  client.fetch(`*[_type == "${collection}"] `);
 
-export const getSiteSettings = (): SanityValues["sitesettings"] =>
-  client
-    .fetch('*[_type=="sitesettings"]{...,socials[]->,navmenu[]->}')
-    .then((settings) => settings[0]);
+export const getPosts = () => getAll("post");
+export const getCategories = () => getAll("category");
+export const getTech = () => getAll("tech");
 
-export const getHomePage = () =>
-  getSingleton<SanityValues["homepage"]>("homepage");
-
-export const getProjectsPage = (): SanityValues["projectspage"] =>
-  client
-    .fetch('*[_type=="projectspage"]{...,projects[]->}')
-    .then((page) => page[0]);
+export const getSiteSettings = () => getSingleton("sitesettings");
+export const getHomePage = () => getSingleton("homepage");
+export const getProjectsPage = async () =>
+  (await client.fetch(`*[_type == "projectspage"]{...,projects[]->}`))?.[0];

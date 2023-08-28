@@ -22,22 +22,6 @@ export default defineType({
   ],
   fields: [
     defineField({
-      name: 'pageTitle',
-      title: 'Page Title',
-      type: 'string',
-      group: 'seo',
-      initialValue: 'Joost Schuur',
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'text',
-      rows: 4,
-      group: 'seo',
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
       name: 'heroTitle',
       type: 'string',
       group: 'content',
@@ -81,6 +65,7 @@ export default defineType({
       type: 'boolean',
       group: 'featured',
       initialValue: true,
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'featuredItems',

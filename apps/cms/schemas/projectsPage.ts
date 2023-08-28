@@ -23,18 +23,25 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'pageHeader',
-      title: 'Page Header',
-      type: 'string',
-      description: 'Uses Page Title unless specified.',
-      group: 'seo',
-    }),
-    defineField({
       name: 'description',
       title: 'Description',
       type: 'text',
       rows: 4,
       group: 'seo',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'pageHeader',
+      title: 'Page Header',
+      type: 'string',
+      description: 'Uses Page Title unless specified.',
+      group: 'content',
+    }),
+    defineField({
+      name: 'pageBody',
+      title: 'Page Body',
+      type: 'blockContent',
+      group: 'content',
       validation: (Rule) => Rule.required(),
     }),
     defineField({

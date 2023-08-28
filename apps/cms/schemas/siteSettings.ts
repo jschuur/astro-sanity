@@ -6,6 +6,10 @@ export default defineType({
   type: 'document',
   groups: [
     {
+      name: 'seo',
+      title: 'SEO',
+    },
+    {
       name: 'navmenu',
       title: 'Nav Menu',
     },
@@ -16,10 +20,26 @@ export default defineType({
   ],
   fields: [
     defineField({
+      name: 'siteTitle',
+      title: 'Site Title',
+      type: 'string',
+      group: 'seo',
+      initialValue: 'Joost Schuur',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'siteDescription',
+      title: 'Description',
+      type: 'text',
+      rows: 4,
+      group: 'seo',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'titleTemplate',
       type: 'string',
       title: 'Title Template',
-      initialValue: 'The GREAT Project - {PAGE_TITLE}',
+      initialValue: '{PAGE_TITLE} | Joost Schuur',
       description:
         'Used for the HTML <title> tag. {PAGE_TITLE} marks where the page title will be inserted.',
     }),
@@ -49,6 +69,7 @@ export default defineType({
               title: 'Prefetch?',
               type: 'boolean',
               initialValue: true,
+              validation: (Rule) => Rule.required(),
             }),
           ],
           preview: {
@@ -64,6 +85,7 @@ export default defineType({
           },
         }),
       ],
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'socials',
@@ -97,13 +119,8 @@ export default defineType({
               title: 'Icon',
               type: 'string',
               description:
-                "Use name/pack from https://icon-sets.iconify.design (e.g. 'entypo:email' is icon 'email' from pack 'entypo')",
+                "Use full name from https://icon-sets.iconify.design (e.g. 'fa6-brands:square-threads'). Supported icon packs: logos, mdi, fa-brands, fa-solid, fa-regular and fa6-* variations.",
               validation: (Rule) => Rule.required(),
-            }),
-            defineField({
-              name: 'pack',
-              title: 'Pack',
-              type: 'string',
             }),
           ],
           preview: {
@@ -118,6 +135,7 @@ export default defineType({
           },
         }),
       ],
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'googleAnalyticsId',
